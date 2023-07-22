@@ -70,7 +70,7 @@ app.get("/jobSearch" , async (req ,res , next) => {
             "job_max_salary": result.job_max_salary,
             
         }));
-
+// hell
         res.send(jobs);
     } catch (error) {
         console.error(error);
