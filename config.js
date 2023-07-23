@@ -1,4 +1,4 @@
 module.exports = {
-    PORT : process.env.PORT,
-    DB_URL : process.env.DATABASE_URL 
+    PORT : '3000',
+    DB_URL : 'postgres://localhost:5432/mhmadnajjar1'
 };
