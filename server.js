@@ -1,7 +1,6 @@
 "use strict";
 const express = require('express');
 const cors = require('cors');
-const axios = require("axios");
 require("dotenv").config();
 const {PORT} = require("./config");
 const authRouter = require("./routes/auth.routes");
@@ -10,6 +9,8 @@ const handleErrorNotFound = require("./error_handlers/404");
 const myJobsdb=require("./routes/myJobs.routes");
 const client = require("./clinet");
 const apis=require("./routes/api.routes");
+
+
 
 const app = express();
 app.use(cors());
