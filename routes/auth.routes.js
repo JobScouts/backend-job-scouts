@@ -92,6 +92,18 @@ Router.get("/getUser/:id" , (req , res, next)=>{
     next(`Error From getUser:/id : ${e}`);  
   }  
   });
+  ///////// Route for delete User 
+Router.delete("/deleteUser/:id" , (req , res, next)=>{
+  try {
+    let {id} = req.params;
+    let sql = `delete from users where id=${id}`;
+    client.query(sql).then(()=>{
+    res.status(200).send("deleted successfully");
+    }) 
+  } catch (error) {
+    next(`Error From deleteUser/:id : ${e}`);  
+  }
+  });
 
   //////// // Route to Add User
   Router.post("/addUser", async (req, res, next) => {
@@ -178,18 +190,7 @@ Router.post("/login", async (req, res, next) => {
   }
 });
 
-///////// Route for delete User 
-Router.delete("/deleteUser/:id" , (req , res, next)=>{
-  try {
-    let {id} = req.params;
-    let sql = `delete from users where id=${id}`;
-    client.query(sql).then(()=>{
-    res.status(200).send("deleted successfully");
-    }) 
-  } catch (error) {
-    next(`Error From deleteUser/:id : ${e}`);  
-  }
-  });
+
 
 
 module.exports = Router;
