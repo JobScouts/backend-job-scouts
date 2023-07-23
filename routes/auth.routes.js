@@ -203,18 +203,6 @@ Router.put("/updateProfile/:id", (req, res, next) => {
   }
 });
 
-Router.post("/addJobToMyPage", (req, res, next) => {
-  try {
-    let { job_id , employer_name, employer_logo, employer_website, job_title, job_highlights } = req.body;
-    let sql = `insert into job (job_id,employer_name,employer_logo,employer_website,job_title,job_highlights) values($1,$2,$3,$4,$5,$6)`;
-    client.query(sql, [job_id, employer_name, employer_logo, employer_website, job_title, job_highlights]).then(() => {
-      res.status(201).send(`job ${job_title} added to job table`);
-    })
-  } catch (error) {
-    next(`Error From addMovie : ${e}`);
-  }
-});
-
 {
   /*
   "employer_name" : result.employer_name,
