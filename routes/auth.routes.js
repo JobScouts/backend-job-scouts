@@ -87,9 +87,24 @@ Router.get("/getUser/:id", (req, res, next) => {
       res.status(200).send(user.rows);
     })
   } catch (error) {
-    next(`Error From getUser:/id : ${e}`);
+
+    next(`Error From getUser:/id : ${e}`);  
+  }  
+  });
+  ///////// Route for delete User 
+Router.delete("/deleteUser/:id" , (req , res, next)=>{
+  try {
+    let {id} = req.params;
+    let sql = `delete from users where id=${id}`;
+    client.query(sql).then(()=>{
+    res.status(200).send("deleted successfully");
+    }) 
+  } catch (error) {
+    next(`Error From deleteUser/:id : ${e}`);  
   }
-});
+  });
+
+
 
 //////// // Route to Add User
 Router.post("/addUser", async (req, res, next) => {
@@ -185,18 +200,6 @@ Router.put("/updateProfile/:id", (req, res, next) => {
     })
   } catch (error) {
     next(`Error From UPDATE/:id : ${e}`);
-  }
-});
-
-Router.post("/addJobToMyPage", (req, res, next) => {
-  try {
-    let { job_id , employer_name, employer_logo, employer_website, job_title, job_highlights } = req.body;
-    let sql = `insert into job (job_id,employer_name,employer_logo,employer_website,job_title,job_highlights) values($1,$2,$3,$4,$5,$6)`;
-    client.query(sql, [job_id, employer_name, employer_logo, employer_website, job_title, job_highlights]).then(() => {
-      res.status(201).send(`job ${job_title} added to job table`);
-    })
-  } catch (error) {
-    next(`Error From addMovie : ${e}`);
   }
 });
 
