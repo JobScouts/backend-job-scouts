@@ -24,7 +24,7 @@ app.use(authRouter);
 
 ///////
 app.use('/jobs',myJobsdb)
-app.use("/getAllJobs",apis);
+app.use("/",apis);
 
 
 
