@@ -1,26 +1,25 @@
 const { Router } = require("express");
 const axios = require("axios");
 const router = Router();
+const {SECRET_API}=require('../config')
 /////// Route to get all jobs from 3-party-API
 router.get("/jobSearch" , async (req ,res , next) => {
     try {
         let jobTitle  = req.query.jobTitle;
-        let page  = req.query.page;
-        let num_pages  = req.query.num_pages;
-
-        const options = {
-            method: 'GET',
-            url: 'https://jsearch.p.rapidapi.com/search',
-            params: {
-              query: jobTitle,
-              page: page,
-              num_pages: num_pages
-            },
-            headers: {
-              'X-RapidAPI-Key': process.env.SECRET_API,
-              'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-            }
-          };
+        let country  = req.query.country;
+  const options = {
+    method: 'GET',
+    url: 'https://jsearch.p.rapidapi.com/search',
+    params: {
+    query: `${jobTitle} in ${country}`,
+    page: '1',
+    num_pages: '1'
+  },
+  headers: {
+    'X-RapidAPI-Key': '54b07ba4b5msh97bf94fb132af66p124cf4jsn700957149c03',
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+  }
+};
         let axiosResponse = await axios.request(options);
         let allJob = axiosResponse.data.data;
 
