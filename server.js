@@ -7,6 +7,7 @@ const {PORT} = require("./config");
 const authRouter = require("./routes/auth.routes");
 const handleErrorServer = require("./error_handlers/500");
 const handleErrorNotFound = require("./error_handlers/404");
+const myJobsdb=require("./routes/myJobs.routes")
 const client = require("./clinet");
 
 
@@ -14,18 +15,14 @@ const app = express();
 app.use(cors());
 app.use(express.json()); 
 
-app.get("/" , (req ,res , next) => {
-    try {
-    // let jobTitle  = req.query.query;
-      res.send("Welcome to Home Page");
-    } catch (e) {
-      next(`handleFavorite Error : ${e}`);
-    }
-});
+
 
 
 /////// 
 app.use(authRouter);
+
+///////
+app.use('/jobs',myJobsdb)
 
 
 /////// Route to get all jobs from 3-party-API
@@ -53,8 +50,8 @@ app.get("/jobSearch" , async (req ,res , next) => {
 
         let jobs = allJob.map((result)=>({
             "employer_name" : result.employer_name,
-            "employer_logo": result.employer_logo,
-            "employer_website": result.employer_website,            
+            "employer_logo": result.employer_logo?result.employer_logo:"",
+            "employer_website": result.employer_website?result.employer_website :"" ,            
             "job_employment_type": result.job_employment_type,
             // "job_publisher":result.job_publisher,
             "job_title": result.job_title,
@@ -64,10 +61,10 @@ app.get("/jobSearch" , async (req ,res , next) => {
             "job_country" : result.job_country,  
             "job_google_link": result.job_google_link,
             "job_apply_link": result.job_apply_link,
-            "job_highlights" : result.job_highlights.Qualifications,
-            "job_title": result.job_title,
+            "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
             "job_min_salary": result.job_min_salary,
             "job_max_salary": result.job_max_salary,
+
             
         }));
 // hell
