@@ -22,8 +22,10 @@ app.use(express.json());
 /////// 
 app.use(authRouter);
 
-///////
+/////////
 app.use('/jobs',myJobsdb)
+
+///////////
 app.use("/",apis);
 
 
