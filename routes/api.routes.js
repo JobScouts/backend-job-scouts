@@ -16,7 +16,7 @@ router.get("/jobSearch" , async (req ,res , next) => {
     num_pages: '1'
   },
   headers: {
-    'X-RapidAPI-Key': '54b07ba4b5msh97bf94fb132af66p124cf4jsn700957149c03',
+    'X-RapidAPI-Key': `${SECRET_API}`,
     'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
   }
 };
