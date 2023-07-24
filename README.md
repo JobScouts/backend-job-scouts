@@ -9,7 +9,7 @@
 
 ## WRRC
 
-Add an image of your WRRC here
+![WRRC]("./assets/images/JobScouts-WRRC.png")
 
 ## Overview
 
@@ -22,13 +22,6 @@ JobScouts is a comprehensive application designed to assist job seekers in findi
 
 ## Project Features
 
-- authentication Route 
-<pre>
-  Mtehod: GET
-  Endpoint: '/authRouter'
-  Desc: The route that is responsable for **Sign Up** **Login** processes
-</pre>
----
 -  Job Search Route 
 <pre>
   Mtehod: GET
@@ -69,23 +62,22 @@ JobScouts is a comprehensive application designed to assist job seekers in findi
 **users** Table: it is a table to store users information
 <pre>
   Mtehod: GET
-  Endpoint: 'authRouter/getAllUsers'
+  Endpoint: '/getAllUsers'
   Desc: Get the whole data in users table
 </pre>
 <pre>
   Mtehod: GET
-  Endpoint: 'authRouter/getUser/:id'
+  Endpoint: '/getUser/:id'
   Desc: Get a specific record from users table by params id (id: params represnt the id of the record)
 </pre>
 <pre>
   Mtehod: DELETE
-  Endpoint: 'authRouter/deleteUser/:id'
+  Endpoint: '/deleteUser/:id'
   Desc: Delete a specific record from users table by params id (id: params represnt the id of the record)
 </pre>
-"/addUser"
 <pre>
   Mtehod: POST
-  Endpoint: 'authRouter/addUser'
+  Endpoint: '/addUser'
   body: {
      'full_name':'user entered value'
      'username' : 'user entered value'
@@ -93,10 +85,5 @@ JobScouts is a comprehensive application designed to assist job seekers in findi
     'password' : 'user entered value'
     'phone' : 'user entered value'
   }
-  Desc: Delete a specific record from users table by params id (id: params represnt the id of the record)
-</pre>
-<pre>
-  Mtehod: DELETE
-  Endpoint: 'authRouter/deleteUser/:id'
   Desc: Delete a specific record from users table by params id (id: params represnt the id of the record)
 </pre>
