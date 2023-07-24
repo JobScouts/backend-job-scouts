@@ -19,12 +19,14 @@ app.use(express.json());
 
 
 
-/////// 
+/////// sing up and login 
 app.use(authRouter);
 
-///////
+/////// myjobs table
 app.use('/jobs',myJobsdb)
-app.use("/",apis);
+
+///// api data
+app.use("/jobSearch",apis);
 
 
 
