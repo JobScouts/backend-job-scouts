@@ -3,7 +3,7 @@ const axios = require("axios");
 const router = Router();
 const {SECRET_API}=require('../config')
 /////// Route to get all jobs from 3-party-API
-router.get("/jobSearch" , async (req ,res , next) => {
+router.get("/" , async (req ,res , next) => {
     try {
         let jobTitle  = req.query.jobTitle;
         let country  = req.query.country;
@@ -16,7 +16,7 @@ router.get("/jobSearch" , async (req ,res , next) => {
     num_pages: '1'
   },
   headers: {
-    'X-RapidAPI-Key': '54b07ba4b5msh97bf94fb132af66p124cf4jsn700957149c03',
+    'X-RapidAPI-Key': SECRET_API,
     'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
   }
 };
