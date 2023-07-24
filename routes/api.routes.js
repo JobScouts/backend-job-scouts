@@ -3,7 +3,7 @@ const axios = require("axios");
 const router = Router();
 const {SECRET_API}=require('../config')
 /////// Route to get all jobs from 3-party-API
-router.get("/jobSearch" , async (req ,res , next) => {
+router.get("/" , async (req ,res , next) => {
     try {
         let jobTitle  = req.query.jobTitle;
         let country  = req.query.country;
