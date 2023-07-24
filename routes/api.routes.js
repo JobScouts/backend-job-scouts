@@ -27,17 +27,17 @@ router.get("/" , async (req ,res , next) => {
             "employer_name" : result.employer_name,
             "employer_logo": result.employer_logo?result.employer_logo:"",
             "employer_website": result.employer_website?result.employer_website :"" ,            
-            "job_employment_type": result.job_employment_type,
+            "job_employment_type": result.job_employment_type, // FullTime / partTime
             "job_title": result.job_title,
             "job_description": result.job_description,
             "job_is_remote" : result.job_is_remote,
             "job_city": result.job_city,
             "job_country" : result.job_country,  
-            "job_google_link": result.job_google_link,
+            // "job_google_link": result.job_google_link,
             "job_apply_link": result.job_apply_link?result.job_apply_link:"",
             "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
-            "job_min_salary": result.job_min_salary,
-            "job_max_salary": result.job_max_salary,
+            // "job_min_salary": result.job_min_salary,
+            // "job_max_salary": result.job_max_salary,
 
             
         }));
