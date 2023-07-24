@@ -122,7 +122,7 @@ Router.post("/addUser", async (req, res, next) => {
     const verificationToken = generateVerificationToken(20);
     // Store the verification token and email_verified status in the database
 
-    const sql = `INSERT INTO users (full_name, username, email, password, phone) VALUES ($1, $2, $3, $4, $5)`
+    const sql = 'INSERT INTO users(full_name, username, email, password, phone) VALUES ($1, $2, $3, $4, $5)'
     // const sql = `INSERT INTO users (full_name, username, email, password, phone, verification_token, email_verified) VALUES ($1, $2, $3, $4, $5, $6, false)`;
 
     // await client.query(sql, [full_name, username, email, hashedPassword, phone, verificationToken]);
