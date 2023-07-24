@@ -18,7 +18,7 @@ router.get("/" , async (req ,res , next) => {
     num_pages: '1'
   },
   headers: {
-    'X-RapidAPI-Key': `${SECRET_API}`,
+    'X-RapidAPI-Key': SECRET_API,
     'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
   }
 };
