@@ -16,11 +16,12 @@ const app = express();
 app.use(cors());
 app.use(express.json()); 
 
+client.connect().then(()=>{
+    app.listen(PORT , ()=>{
+    console.log(`Running at ${PORT} Port`);
+        });
+  });
 
-
-
-/////// sing up and login 
-app.use(authRouter);
 
 
 /////// myjobs table
@@ -29,7 +30,9 @@ app.use('/jobs',myJobsdb)
 ///// api data
 app.use("/jobSearch",apis);
 
+/////// sing up and login 
 
+app.use(authRouter);
 
 /////////// Handle Error Routes
 
@@ -37,8 +40,4 @@ app.use(handleErrorServer);
 app.use(handleErrorNotFound);
 
 
-client.connect().then(()=>{
-    app.listen(PORT , ()=>{
-    console.log(`Running at ${PORT} Port`);
-        });
-  });
+

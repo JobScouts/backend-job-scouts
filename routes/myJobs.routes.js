@@ -19,20 +19,21 @@ router.post("/", async (req, res, next) => {
       //let id = req.params.id;
 
        let {job_title, employer_name, employer_logo, employer_website, job_highlights,job_apply_link } = req.body;
-      let sql=`SELECT * FROM myjobs WHERE job_title = ${job_title} AND employer_name = ${employer_name}`;
-      let jobinfo= await client.query(sql);
-      if(jobinfo.rows.length>0){
-        res.send('job in data base')
-      }
-      else{
-      let sql = `insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link) values($1,$2,$3,$4,$5,$6)`;
+      //let sql=`SELECT * FROM myjobs WHERE job_title = ${job_title} AND employer_name = ${employer_name}`;
+      //let jobinfo= await client.query(sql);
+      /*if(jobinfo.rows.length>0){
+        res.send('job already in data base')
+      }*/
+     // else{
+      let sql = 'insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link) values($1,$2,$3,$4,$5,$6)';
       await client.query(sql, [job_title,employer_name,employer_logo, employer_website, job_highlights,job_apply_link]).then(() => {
         res.status(201).send(`job ${job_title} added to myjobs table`);
 //user id:${user_id} connect with job id:${job_id} in table user_jobs
         // let sql = `insert into user_jobs (user_id, job_id) values($1,$2)`;
       // await client.query(sql, [user_id, job_id]).then(() => {
       //   res.status(201).send(`user id:${user_id} connected with job id:${job_id} in table user_jobs`);
-        })}
+        })
+      //}
     } catch (error) {
       next(`Error From addJob : ${error}`);
     }
