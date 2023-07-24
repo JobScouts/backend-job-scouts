@@ -13,6 +13,8 @@ router.get("/", async(req,res,next)=>{
             next(`ERROR From getjob: ${error}`)
           }
 })
+//for testing
+
 
 router.post("/", async (req, res, next) => {
     try {
