@@ -66,41 +66,31 @@ app.use(authRouter);
 
 
 app.patch('/update', (req, res) => {
+  let data = JSON.stringify({
+    "user_metadata": {
+      "about": "Hello"
+    }
+  });
   
-
-try {
-  const { user_id, about } = req.body; // Assuming you send userId and about in the request body
-
-  const auth0Domain = 'dev-hqpw523nqwilhf7z.us.auth0.com'; // Replace with your Auth0 domain
-                     //dev-hqpw523nqwilhf7z.us.auth0.com
-  const apiUrl = `https://${auth0Domain}/api/v2/users/${user_id}`;
-
-  const data = { user_metadata: { about } };
-  const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkdEakZMOXFWZnNiWFBSZ0Ixanh3YSJ9.eyJpc3MiOiJodHRwczovL2Rldi1ocXB3NTIzbnF3aWxoZjd6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiIxTFhHaTN5UTVlOHlXdDhKd2paWkU5dzlCUUNBTHcyWUBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9kZXYtaHFwdzUyM25xd2lsaGY3ei51cy5hdXRoMC5jb20vYXBpL3YyLyIsImlhdCI6MTY5MDMxMjk2MSwiZXhwIjoxNjkwMzk5MzYxLCJhenAiOiIxTFhHaTN5UTVlOHlXdDhKd2paWkU5dzlCUUNBTHcyWSIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.SCNtc1KrfIwyZthk9GC3wTNWFBTHnlGx8vgz-r8_idqaaijkBimHNdlNNBthQG6O7YPlVMAge-dKD3Q2XhF0gtMlAQW-mtSJAbLLpEpW-InaMcj48M7JvcFpfJpQXTjpKwc0_U5uHkMHl-THe11-ASyNw825DgBE6oJeeVH46jL0vwkXpSn78xGITYzoRm2cmqzBZ-o26G-PSFnt31IWI3jMv6ulU7SZ4fbFuns53bVnN11s24WKT5VjcsJDSj2X3P5UWn4UMFS_PVs8Q6jTkpD506xL526C3d3pwuvrCUZtYuyYhgnt6zLWfL0zUMCkT4yOD7teQu8xaUhc-24ggA'; // Replace with your Management API Access Token
-
-  const config = {
+  let config = {
     method: 'patch',
-    url: apiUrl,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+    url: 'https://login.auth0.com/api/v2/users/google-oauth2%7C100737014092563339568',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Accept': 'application/json'
     },
-    data: data,
+    data : data
   };
-
+  
   axios(config)
-    .then((response) => {
-      console.log('User about updated successfully:', response.data);
-      res.status(200).json({ message: 'User about updated successfully.' });
-    })
-    .catch((error) => {
-      console.error('Error updating user about:', error.response.data);
-      res.status(500).json({ error: 'Error updating user about.' });
-    });
-} catch (error) {
-  console.error('Server error:', error);
-  res.status(500).json({ error: 'Internal Server Error' });
-}
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+
 });
 
 
