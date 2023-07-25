@@ -68,7 +68,7 @@ router.delete("/:id", async (req, res, next) => {
 router.patch('/update', (req, res) => {
   let { about } = req.body;
   let data = JSON.stringify({
-    app_metadata: { about },
+    user_metadata: { about },
   });
 
   let config = {
