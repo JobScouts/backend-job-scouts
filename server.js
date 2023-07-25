@@ -66,9 +66,13 @@ app.use(authRouter);
 
 
 app.patch('/update', (req, res) => {
+  
+
+try {
   const { user_id, about } = req.body; // Assuming you send userId and about in the request body
 
   const auth0Domain = 'dev-hqpw523nqwilhf7z.us.auth0.com'; // Replace with your Auth0 domain
+                     //dev-hqpw523nqwilhf7z.us.auth0.com
   const apiUrl = `https://${auth0Domain}/api/v2/users/${user_id}`;
 
   const data = { user_metadata: { about } };
@@ -93,6 +97,10 @@ app.patch('/update', (req, res) => {
       console.error('Error updating user about:', error.response.data);
       res.status(500).json({ error: 'Error updating user about.' });
     });
+} catch (error) {
+  console.error('Server error:', error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
 });
 
 
