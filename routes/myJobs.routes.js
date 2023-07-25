@@ -46,4 +46,90 @@ router.delete("/:id", async (req, res, next) => {
     next(`error in delete job by id: ${error}`);
   }
 });
+
+
+// Router.put("/UPDATE/:id" , (req , res, next)=>{
+//   try {
+//       let {id} = req.params;
+//       let {about}=req.body;
+//       let sql = `UPDATE myjobs SET about=$1 where id=${id}`; 
+//       client.query(sql , [about]).then(()=>{
+//       res.status(200).send("updated successfully");
+//   }) 
+//   } catch (error) {
+//     next(`Error From UPDATE/:id : ${e}`);
+//   }
+//   });
+
+
+/// Route To Update About From MyProfile
+
+// Route handler for the /update path
+router.patch('/update', (req, res) => {
+  let { about } = req.body;
+  let data = JSON.stringify({
+    app_metadata: { about },
+  });
+
+  let config = {
+    method: 'patch',
+    url: 'https://login.auth0.com/api/v2/users/google-oauth2%7C100737014092563339568',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+      res.status(200).json({ message: 'Successfully updated about.' });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ message: 'Error updating about.' });
+    });
+});
+
 module.exports = router
+
+// const axios = require('axios');
+// let data = JSON.stringify({
+//   "blocked": false,
+//   "email_verified": false,
+//   "email": "string",
+//   "phone_number": "string",
+//   "phone_verified": false,
+//   "user_metadata": {},
+//   "app_metadata": {},
+//   "given_name": "string",
+//   "family_name": "string",
+//   "name": "string",
+//   "nickname": "string",
+//   "picture": "string",
+//   "verify_email": false,
+//   "verify_phone_number": false,
+//   "password": "string",
+//   "connection": "string",
+//   "client_id": "string",
+//   "username": "string"
+// });
+
+// let config = {
+//   method: 'patch',
+//   url: 'https://login.auth0.com/api/v2/users/google-oauth2%7C100737014092563339568',
+//   headers: { 
+//     'Content-Type': 'application/json', 
+//     'Accept': 'application/json'
+//   },
+//   data : data
+// };
+
+// axios(config)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
