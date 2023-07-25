@@ -2,6 +2,8 @@ const { Router } = require("express");
 const axios = require("axios");
 const router = Router();
 const {SECRET_API}=require('../config')
+
+
 /////// Route to get all jobs from 3-party-API
 router.get("/" , async (req ,res , next) => {
     try {
@@ -34,12 +36,10 @@ router.get("/" , async (req ,res , next) => {
             "job_city": result.job_city,
             "job_country" : result.job_country,  
             "job_google_link": result.job_google_link,
-            "job_apply_link": result.job_apply_link?result.job_apply_link:"",
+            "job_apply_link": result.job_apply_link,
             "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
             "job_min_salary": result.job_min_salary,
-            "job_max_salary": result.job_max_salary,
-
-            
+            "job_max_salary": result.job_max_salary    
         }));
         res.send(jobs);
     } catch (error) {
