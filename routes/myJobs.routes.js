@@ -1,59 +1,49 @@
-'use strict';
-const {Router} = require("express");
+const { Router } = require("express");
+const axios = require("axios");
 const router = Router();
-const client = require("../clinet");
+const {SECRET_API}=require('../config')
 
 
-router.get("/", async(req,res,next)=>{
-    try{
-        let sql='SELECT * FROM myjobs'
-        let jobinfo= await client.query(sql)
-          res.status(200).send(jobinfo.rows)}
-          catch(error){
-            next(`ERROR From getjob: ${error}`)
-          }
-})
-
-router.post("/", async (req, res, next) => {
+/////// Route to get all jobs from 3-party-API
+router.get("/" , async (req ,res , next) => {
     try {
-      //let id = req.params.id;
+        let jobTitle  = req.query.jobTitle;
+        let country  = req.query.country;
+  const options = {
+    method: 'GET',
+    url: 'https://jsearch.p.rapidapi.com/search',
+    params: {
+    query: `${jobTitle} in ${country}`,
+    page: '1',
+    num_pages: '1'
+  },
+  headers: {
+    'X-RapidAPI-Key': SECRET_API,
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+  }
+};
+        let axiosResponse = await axios.request(options);
+        let allJob = axiosResponse.data.data;
 
-      // let {job_title, employer_name, employer_logo, employer_website, job_highlights,job_apply_link } = req.body;
-      let sql=`SELECT * FROM myjobs WHERE job_title = ${req.body.job_title} AND employer_name = ${req.body.employer_name}`;
-      let jobinfo= await client.query(sql);
-      if(jobinfo.rows.length>0){
-        res.send('job in data base')
-      }
-      else{
-      let sql = `insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link) values($1,$2,$3,$4,$5,$6)`;
-      await client.query(sql, [req.body.job_title, req.body.employer_name, req.body.employer_logo, req.body.employer_website, req.body.job_highlights,req.body.job_apply_link]).then(() => {
-        res.status(201).send(`job ${req.body.job_title} added to myjobs table`);
-//user id:${user_id} connect with job id:${job_id} in table user_jobs
-        // let sql = `insert into user_jobs (user_id, job_id) values($1,$2)`;
-      // await client.query(sql, [user_id, job_id]).then(() => {
-      //   res.status(201).send(`user id:${user_id} connected with job id:${job_id} in table user_jobs`);
-        })}
+        let jobs = allJob.map((result)=>({
+            "employer_name" : result.employer_name,
+            "employer_logo": result.employer_logo?result.employer_logo:"",
+            "employer_website": result.employer_website?result.employer_website :"" ,            
+            "job_employment_type": result.job_employment_type,
+            "job_title": result.job_title,
+            "job_description": result.job_description,
+            "job_is_remote" : result.job_is_remote,
+            "job_city": result.job_city,
+            "job_country" : result.job_country,  
+            "job_google_link": result.job_google_link,
+            "job_apply_link": result.job_apply_link,
+            "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
+            "job_min_salary": result.job_min_salary,
+            "job_max_salary": result.job_max_salary    
+        }));
+        res.send(jobs);
     } catch (error) {
-      next(`Error From addJob : ${error}`);
+        console.error(error);
     }
-  });
-
-  router.delete("/:id", async (req, res, next) => {
-    try {
-      let id = req.params.id;
-      let getsql = 'SELECT * FROM myjobs';
-      let deletesql = `DELETE FROM myjobs WHERE id=${id} `; 
-      let jobinfo = await client.query(getsql);
-      if (jobinfo.rows.length > 0) {
-        await client.query(deletesql);
-        res.status(204).end();
-      } else {
-        res.status(404).send("id does not exist");
-      }
-    } catch (error) {
-      next(`error in delete job by id: ${error}`);
-    }
-  });
-  
-
-  module.exports=router
+});
+module.exports=router;

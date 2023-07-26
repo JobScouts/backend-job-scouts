@@ -1,8 +1,6 @@
 "use strict";
 const express = require('express');
-const connectDb = require('./routes/mongoApi.routes')
 const cors = require('cors');
-const axios = require("axios");
 require("dotenv").config();
 const {PORT} = require("./config");
 const authRouter = require("./routes/auth.routes");
@@ -12,40 +10,31 @@ const myJobsdb=require("./routes/myJobs.routes");
 const client = require("./clinet");
 const apis=require("./routes/api.routes");
 
-connectDb();
 
 const app = express();
 app.use(cors());
 app.use(express.json()); 
 
+client.connect().then(()=>{
+    app.listen(PORT , ()=>{
+    console.log(`Running at ${PORT} Port`);
+        });
+  });
 
 
 
-/////// 
-app.use(authRouter);
-
-///////
+/////// myjobs table
 app.use('/jobs',myJobsdb)
-app.use("/getAllJobs",apis);
 
+///// api data
+app.use("/jobSearch",apis);
 
+/////// sing up and login 
+
+app.use(authRouter);
 
 /////////// Handle Error Routes
 
 app.use(handleErrorServer);
 app.use(handleErrorNotFound);
 
-
-
-
-
-
-
-
-
-
-// client.connect().then(()=>{
-//     app.listen(PORT , ()=>{
-//     console.log(`Running at ${PORT} Port`);
-//         });
-//   });
