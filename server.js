@@ -38,6 +38,3 @@ app.use(authRouter);
 
 app.use(handleErrorServer);
 app.use(handleErrorNotFound);
-
-
-
