@@ -11,7 +11,6 @@ const client = require("./clinet");
 const apis=require("./routes/api.routes");
 
 
-
 const app = express();
 app.use(cors());
 app.use(express.json()); 
