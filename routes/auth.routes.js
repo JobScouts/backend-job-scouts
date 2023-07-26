@@ -104,8 +104,6 @@ Router.delete("/deleteUser/:id" , (req , res, next)=>{
   }
   });
 
-
-
 //////// // Route to Add User
 Router.post("/addUser", async (req, res, next) => {
   try {
@@ -206,21 +204,5 @@ Router.put("/updateProfile/:id", (req, res, next) => {
     next(`Error From UPDATE/:id : ${e}`);
   }
 });
-
-{
-  /*
-  "employer_name" : result.employer_name,
-  "employer_logo": result.employer_logo,
-  "employer_website": result.employer_website, 
-  "job_city": result.job_city,
-  "job_country" : result.job_country,  
-  "job_google_link": result.job_google_link,
-  "job_apply_link": result.job_apply_link,
-  "job_highlights" : result.job_highlights.Qualifications,
-  "job_title": result.job_title,
-  "job_min_salary": result.job_min_salary,
-  "job_max_salary": result.job_max_salary,
-  */
-}
 
 module.exports = Router;
