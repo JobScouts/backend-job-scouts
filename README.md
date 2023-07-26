@@ -9,7 +9,7 @@
 
 ## WRRC
 
-![WRRC]("./assets/images/JobScouts-WRRC.png")
+![WRRC](./assets/images/WRRC.png)
 
 ## Overview
 
@@ -31,9 +31,9 @@ JobScouts is a comprehensive application designed to assist job seekers in findi
          }
   Desc: Send request to 3rd Party API
 </pre>
-
 ---
 - jobs DataBase Routes :
+
 **myjobs** Table: it is a table related to the jobs saved by the user 
 <pre>
   Mtehod: GET
