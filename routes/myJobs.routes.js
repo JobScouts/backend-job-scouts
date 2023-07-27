@@ -19,7 +19,7 @@ router.get("/", async(req,res,next)=>{
 router.post("/", async (req, res, next) => {
     try {
        let {job_title, employer_name, employer_logo, employer_website, job_highlights,job_apply_link,sub, job_country,job_city} = req.body;
-      let sql = 'insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link,sub) values($1,$2,$3,$4,$5,$6,$7,$8,$9)';
+      let sql = 'insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link,sub,job_country,job_city) values($1,$2,$3,$4,$5,$6,$7,$8,$9)';
       await client.query(sql, [job_title,employer_name,employer_logo, employer_website, job_highlights,job_apply_link,sub,job_country,job_city]).then(() => {
         res.status(201).send(`job ${job_title} added to myjobs table`);
         })
@@ -27,7 +27,10 @@ router.post("/", async (req, res, next) => {
       next(`Error From addJob : ${error}`);
     }
   });
-
+/**
+ *  "job_city": result.job_city,
+    "job_country" : result.job_country,  
+ */
   // Route to UnSave an Job
   router.delete("/:id", async (req, res, next) => {
     try {

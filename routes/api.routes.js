@@ -41,6 +41,7 @@ router.get("/" , async (req ,res , next) => {
             "job_min_salary": result.job_min_salary,
             "job_max_salary": result.job_max_salary    
         }));
+        
         res.send(jobs);
     } catch (error) {
         console.error(error);
