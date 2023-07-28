@@ -34,7 +34,7 @@ router.get("/" , async (req ,res , next) => {
             "job_description": result.job_description?result.job_description:"",
             "job_is_remote" : result.job_is_remote?result.job_is_remote:"",
             "job_city": result.job_city?result.job_city:"",
-            "job_country" : result.job_country?result.country:"",
+            "job_country" : result.job_country?result.job_country:"",
             "job_google_link": result.job_google_link?result.job_google_link:"",
             "job_apply_link": result.job_apply_link?result.job_apply_link:"",
             "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
