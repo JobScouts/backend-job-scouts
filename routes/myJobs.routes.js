@@ -4,10 +4,10 @@ const router = Router();
 const client = require("../clinet");
 
 router.get("/", async(req,res,next)=>{
-    try{
-      const { uid }= req.query;
-        let sql=`SELECT * FROM myjobs WHERE sub = $1`
-        let jobinfo= await client.query(sql,[uid])
+  try{
+      // const { uid }= req.query;
+        let sql=`SELECT * FROM myjobs`
+        let jobinfo= await client.query(sql)
           res.status(200).send(jobinfo.rows)
         }
           catch(error){
