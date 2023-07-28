@@ -18,19 +18,17 @@ router.get("/", async(req,res,next)=>{
 // Route to Save new Job to profile 
 router.post("/", async (req, res, next) => {
     try {
-       let {job_title, employer_name, employer_logo, employer_website, job_highlights,job_apply_link,sub, job_country,job_city} = req.body;
-      let sql = 'insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link,sub,job_country,job_city) values($1,$2,$3,$4,$5,$6,$7,$8,$9)';
-      await client.query(sql, [job_title,employer_name,employer_logo, employer_website, job_highlights,job_apply_link,sub,job_country,job_city]).then(() => {
+
+       let {job_title, employer_name, employer_logo, employer_website, job_highlights,job_apply_link,sub,job_city,job_country,job_id } = req.body;
+      let sql = 'insert into myjobs (job_title,employer_name,employer_logo,employer_website,job_highlights,job_apply_link,sub,job_city,job_country,job_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)';
+      await client.query(sql, [job_title,employer_name,employer_logo, employer_website, job_highlights,job_apply_link,sub,job_city,job_country,job_id ]).then(() => {
         res.status(201).send(`job ${job_title} added to myjobs table`);
         })
     } catch (error) {
       next(`Error From addJob : ${error}`);
     }
   });
-/**
- *  "job_city": result.job_city,
-    "job_country" : result.job_country,  
- */
+
   // Route to UnSave an Job
   router.delete("/:id", async (req, res, next) => {
     try {
