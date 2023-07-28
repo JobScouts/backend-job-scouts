@@ -6,14 +6,18 @@ const client = require("../clinet");
 // Un-use until now
 router.get("/", async(req,res,next)=>{
     try{
-        let sql='SELECT * FROM myjobs'
-        let jobinfo= await client.query(sql)
-          res.status(200).send(jobinfo.rows)}
+      const { sub }= req.query;
+        let sql=`SELECT * FROM myjobs WHERE sub = $1`
+        let jobinfo= await client.query(sql,[sub])
+          res.status(200).send(jobinfo.rows)
+        }
           catch(error){
             next(`ERROR From getjob: ${error}`)
           }
 })
 
+
+//"ERROR From getjob: error: operator does not exist: character varying = integer",
 
 // Route to Save new Job to profile 
 router.post("/", async (req, res, next) => {
