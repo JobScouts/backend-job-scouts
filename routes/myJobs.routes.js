@@ -3,12 +3,11 @@ const {Router} = require("express");
 const router = Router();
 const client = require("../clinet");
 
-// Un-use until now
 router.get("/", async(req,res,next)=>{
     try{
-      const { sub }= req.query;
+      const { uid }= req.query;
         let sql=`SELECT * FROM myjobs WHERE sub = $1`
-        let jobinfo= await client.query(sql,[sub])
+        let jobinfo= await client.query(sql,[uid])
           res.status(200).send(jobinfo.rows)
         }
           catch(error){
