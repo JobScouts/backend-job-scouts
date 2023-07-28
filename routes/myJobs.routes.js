@@ -3,7 +3,6 @@ const {Router} = require("express");
 const router = Router();
 const client = require("../clinet");
 
-// Un-use until now
 router.get("/", async(req,res,next)=>{
     try{
       const { sub }= req.query;
@@ -15,9 +14,6 @@ router.get("/", async(req,res,next)=>{
             next(`ERROR From getjob: ${error}`)
           }
 })
-
-
-//"ERROR From getjob: error: operator does not exist: character varying = integer",
 
 // Route to Save new Job to profile 
 router.post("/", async (req, res, next) => {
