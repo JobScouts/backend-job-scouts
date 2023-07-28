@@ -42,6 +42,7 @@ router.get("/" , async (req ,res , next) => {
             "job_max_salary": result.job_max_salary,
             "job_id": result.job_id,
         }));
+        
         res.send(jobs);
     } catch (error) {
         console.error(error);
