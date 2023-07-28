@@ -39,7 +39,8 @@ router.get("/" , async (req ,res , next) => {
             "job_apply_link": result.job_apply_link,
             "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
             "job_min_salary": result.job_min_salary,
-            "job_max_salary": result.job_max_salary    
+            "job_max_salary": result.job_max_salary,
+            "job_id": result.job_id,
         }));
         res.send(jobs);
     } catch (error) {
