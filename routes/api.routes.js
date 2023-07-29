@@ -40,7 +40,8 @@ router.get("/" , async (req ,res , next) => {
             "job_highlights": result.job_highlights && result.job_highlights.Qualifications ? result.job_highlights.Qualifications.join(' * ') : "",          
             "job_min_salary": result.job_min_salary?result.job_min_salary:"",
             "job_max_salary": result.job_max_salary?result.job_max_salary:"",
-            "job_id": result.job_id?result.job_id:""
+            "job_id": result.job_id?result.job_id:"",
+            "job_posted_at_datetime_utc":result.job_posted_at_datetime_utc?result.job_posted_at_datetime_utc:""
         }));
         
         res.send(jobs);
