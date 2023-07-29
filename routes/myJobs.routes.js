@@ -3,6 +3,8 @@ const {Router} = require("express");
 const router = Router();
 const client = require("../clinet");
 
+
+/// Route to get data for 1 user
 router.get("/", async(req,res,next)=>{
     try{
       const { sub }= req.query;
@@ -14,6 +16,21 @@ router.get("/", async(req,res,next)=>{
             next(`ERROR From getjob: ${error}`)
           }
 })
+
+
+
+// Route to get data for all user
+router.get("/allSavedJob", async(req,res,next)=>{
+  try{
+      let sql=`SELECT * FROM myjobs`
+      let jobinfo= await client.query(sql)
+        res.status(200).send(jobinfo.rows)
+      }
+        catch(error){
+          next(`ERROR From getjob: ${error}`)
+        }
+})
+
 
 // Route to Save new Job to profile 
 router.post("/", async (req, res, next) => {
